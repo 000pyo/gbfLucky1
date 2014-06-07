@@ -3,7 +3,7 @@ gbfLucky1 v.0.1.3
 Test simple chrome apps for remind Grandblue Fantasy lucky gacha & Assault Time 
 
 Installing with packed crx
-- Get .crx file from https://github.com/000pyo/gbfLucky1/blob/master/gbfLucky0.1.1.crx
+- Get .crx file from https://github.com/000pyo/gbfLucky1/blob/master/gbfLucky0.1.3.crx
 - Drag the file into "chrome://extensions"
 
 Or install the unpacked
