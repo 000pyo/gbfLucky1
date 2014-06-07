@@ -1,4 +1,4 @@
-gbfLucky1 v.0.1.1
+gbfLucky1 v.0.1.3
 ===============
 Test simple chrome apps for remind Grandblue Fantasy lucky gacha & Assault Time 
 
@@ -14,4 +14,6 @@ Or install the unpacked
 
 Change log
 ----------
+0.1.3 Encapsulate notification option creations, notify assault time ended
+0.1.2 Encapsulate alarm creations
 0.1.1 Add timezone support
