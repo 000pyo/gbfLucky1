@@ -20,14 +20,11 @@ var AT2Time = 0;
 /*
 *For first run
 */
-chrome.alarms.create('AT1', {when:getEpochTimeWTimeZone(AT1Time, 0)});
-console.log('AT1 Created at ' + new Date(Date.now()));
+setAlarm('AT1', AT1Time, 0, true);
 
-chrome.alarms.create('AT2', {when:getEpochTimeWTimeZone(AT2Time, 0)});
-console.log('AT2 Created at ' + new Date(Date.now()));
+setAlarm('AT2', AT2Time, 0, true);
 
-chrome.alarms.create('midnight', {when:getEpochTime(0, 0) + 1000*60*60*24 });
-console.log('midnight Created at ' + new Date(Date.now()));
+setAlarm('midnight', 24, 0, false);
 
 
 
@@ -109,8 +106,27 @@ function getEpochTimeWTimeZone(hour, min){
 }
 
 /*
-*Notification methods
+*Alarms Generator
 */
+function setAlarm(name, hour, min, timezone)
+{
+    if(timezone)
+    {
+        chrome.alarms.create(name, {when:getEpochTimeWTimeZone(hour, min)});
+        console.log('Alarm name ' + name + ' is set with timezone support.'); 
+    }
+    else
+    {
+        chrome.alarms.create(name, {when:getEpochTime(hour, min)});       
+        console.log('Alarm name ' + name + ' is set.'); 
+    }
+    
+}
+
+
+
+
+
 function notificationClosed(notID, bByUser) {
     console.log("The notification '" + notID + "' was closed" + (bByUser ? " by the user" : ""));
 }
