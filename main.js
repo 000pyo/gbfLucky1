@@ -14,16 +14,16 @@ chrome.app.runtime.onLaunched.addListener(function() {
 
 
 
-var AT1Time = 12;
-var AT2Time = 22;
+var AT1Time = 14;
+var AT2Time = 0;
 
 /*
 *For first run
 */
-chrome.alarms.create('AT1', {when:getEpochTime(AT1Time, 0)});
+chrome.alarms.create('AT1', {when:getEpochTimeWTimeZone(AT1Time, 0)});
 console.log('AT1 Created at ' + new Date(Date.now()));
 
-chrome.alarms.create('AT2', {when:getEpochTime(AT2Time, 0)});
+chrome.alarms.create('AT2', {when:getEpochTimeWTimeZone(AT2Time, 0)});
 console.log('AT2 Created at ' + new Date(Date.now()));
 
 chrome.alarms.create('midnight', {when:getEpochTime(0, 0) + 1000*60*60*24 });
@@ -55,10 +55,10 @@ chrome.alarms.onAlarm.addListener(function(alarm){
         chrome.alarms.create('midnight', {when:getEpochTime(0, 0) + 1000*60*60*24 });
         console.log("Set new midnight alarm");
 
-        chrome.alarms.create('AT1', {when:getEpochTime(AT1Time, 0)});
+        chrome.alarms.create('AT1', {when:getEpochTimeWTimeZone(AT1Time, 0)});
         console.log('AT1 Created at ' + new Date(Date.now())); 
 
-        chrome.alarms.create('AT2', {when:getEpochTime(AT2Time, 0)});
+        chrome.alarms.create('AT2', {when:getEpochTimeWTimeZone(AT2Time, 0)});
         console.log('AT2 Created at ' + new Date(Date.now()));
     }
     else
@@ -87,25 +87,9 @@ function getEpochTime(hour, min){
         return newTime.getTime();
     }
 
-function getAlarmTime(hour, min){
-    if (Date.now() - getEpochTime(hour, min) > 1000*60*60*24)
-    {
-        return getEpochTime(hour, min) + 1000*60*60*24;
-    }
-    else
-    {
-        return getEpochTime(hour, min);
-    }
-}
+function getEpochTimeWTimeZone(hour, min){
 
-function getAlarmTimeWTimeZone(hour, min){
-
-    var alarmTime = getEpochTime(hour, 0);
-
-    if(Date.now() > alarmTime + 24*60*60*1000)
-    {
-        alarmTime += 24*60*60*1000;
-    }
+    
 
     var timeZone = (new Date(Date.now()).getTimezoneOffset()) / (-60);
     var timeDiff = 0;
@@ -114,11 +98,15 @@ function getAlarmTimeWTimeZone(hour, min){
         timeDiff = (9 - timeZone);
     }
 
-    alarmTime -= timeDiff*1000*60*60;
+    var alarmTime = getEpochTime(hour - timeDiff, 0);
+
+    if (hour < timeDiff)
+    {
+        alarmTime += 24*60*60*1000;
+    }
 
     return alarmTime;
 }
-
 
 /*
 *Notification methods
