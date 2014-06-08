@@ -14,7 +14,7 @@ Or install the unpacked
 
 Change log
 ----------
-0.1.4 Bux fix for endless looping alarm for AT
-0.1.3 Encapsulate notification option creations, notify assault time ended
-0.1.2 Encapsulate alarm creations
-0.1.1 Add timezone support
+- 0.1.4 Bux fix for endless looping alarm for AT
+- 0.1.3 Encapsulate notification option creations, notify assault time ended
+- 0.1.2 Encapsulate alarm creations
+- 0.1.1 Add timezone support
