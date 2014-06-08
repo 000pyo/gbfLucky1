@@ -48,7 +48,6 @@ chrome.alarms.onAlarm.addListener(function(alarm){
             opt.iconUrl = "/img/stamp10.png";
             chrome.notifications.create("AT1", opt, notificationRinged);
 
-            setAlarm('AT1', AT1Time+24, 0, true);
             break;
         case 'AT2':
             opt = getNotificationOption('Aassault Time 2', 'Assault Time 2 at ' + AT2Time + '.00 (GMT+9) \n Ringed ' + new Date(Date.now()));
@@ -62,7 +61,7 @@ chrome.alarms.onAlarm.addListener(function(alarm){
             opt.iconUrl = "/img/stamp10.png";
             chrome.notifications.create("AT1", opt, notificationRinged);
 
-            setAlarm('AT2', AT2Time+24, 0, true);
+            
             break;
         case 'lucky':
             opt = getNotificationOption('Lucky Gacha Time', 'Lucky Gacha Time \n' + new Date(Date.now()));
